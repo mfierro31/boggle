@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Boggle{% endblock %}
+{% block content %}
+<div class="container text-center">
+  <div class="row">
+    <div class="col align-self-start">
+      Times played: {{played}}
+    </div>
+    <div class="col align-self-end">
+      Highest score: {{score}}
+    </div>
+  </div>
+</div>
+<div id="board" class="container mt-3">
+  <div class="row">
+    <div class="display-1 mb-4">Boggle!</div>
+  </div>
+  {% for y in range(5) %}
+  <div class="row">
+    {% for x in range(5) %}
+    <div class="col px-0 text-center border border-dark">{{board[y][x]}}</div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+<div id="timer">
+  <h1 class="display-4 mt-3" id="time"></h1>
+</div>
+<div class="container mt-4 d-flex justify-content-center">
+  <form class="form-inline" id="guess-form" action="">
+    <div class="form-group">
+      <label class="mr-2" for="guess">Enter a guess: </label>
+      <input class="mr-2" type="text" id="guess" name="guess">
+      <button class="btn btn-primary" id="submit-btn">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="mx-auto" id="message-container">
+  
+</div>
+<div id="score-container">
+  <h1 class="display-4 mt-3"><strong id="score"></strong></h1>
+</div>
+{% endblock %}

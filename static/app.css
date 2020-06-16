@@ -1,0 +1,15 @@
+#board {
+  width: 20%;
+}
+
+#message-container {
+  width: 50%;
+}
+
+#score-container {
+  text-align: center;
+}
+
+#timer {
+  text-align: center;
+}
