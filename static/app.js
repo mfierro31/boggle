@@ -55,5 +55,11 @@ $('#guess-form').submit(async function(evt) {
       <strong>Not a word!  Try again!</strong>
     </div>
     `)
+  } else if (message === "word-already-used") {
+    $('#message-container').append(`
+    <div class="alert alert-danger alert-dismissible fade show text-center mt-3" role="alert">
+      <strong>You already used that word!  Try again!</strong>
+    </div>
+    `)
   }
 })
