@@ -1,7 +1,6 @@
 from flask import Flask, session, request, redirect, render_template, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from boggle import Boggle
-import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "MrPoopyButthole"
@@ -13,6 +12,7 @@ boggle_game = Boggle()
 
 @app.route('/')
 def show_home():
+    """Shows main page, sets multiple sessions"""
     board = boggle_game.make_board()
     session['board'] = board
     session['times_visited'] = session.get('times_visited', 0) + 1
@@ -22,6 +22,7 @@ def show_home():
 
 @app.route('/check-word')
 def check_word():
+    """Checks the user's submitted guess to see if it is a valid word and if it's on the board"""
     word = request.args['guess']
 
     if word in session['guess']:
@@ -38,6 +39,7 @@ def check_word():
 
 @app.route('/save-score', methods=['POST'])
 def save_score():
+    """Saves the user's score after each game and determines if it's higher or lower than the previous one"""
     new_score = request.get_json()
 
     if new_score['score'] > session['scores']:
