@@ -8,6 +8,7 @@ app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
 class FlaskTests(TestCase):
     def test_home_page(self):
+        """Test homepage for correct HTML and if correct sessions are created"""
         with app.test_client() as client:
             res = client.get('/')
 
@@ -24,6 +25,7 @@ class FlaskTests(TestCase):
 
 
     def test_valid_word(self):
+        """Test if word is valid and is on board"""
         with app.test_client() as client:
             with client.session_transaction() as sess:
                 sess['board'] = [["C", "A", "T", "T", "T"], 
@@ -38,18 +40,21 @@ class FlaskTests(TestCase):
         self.assertEqual(response.json['result'], 'ok')
 
     def test_not_on_board(self):
+        """Test if word is not on board"""
         with app.test_client() as client:
             client.get('/')
             res = client.get('/check-word?guess=impossible')
             self.assertEqual(res.json['result'], 'not-on-board')
 
     def test_not_a_word(self):
+        """Test if word is an actual word"""
         with app.test_client() as client:
             client.get('/')
             res = client.get('/check-word?guess=crflm')
             self.assertEqual(res.json['result'], 'not-a-word')
 
     def test_already_used(self):
+        """Test if word was already used"""
         with app.test_client() as client:
             client.get('/')
 
