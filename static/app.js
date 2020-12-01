@@ -14,7 +14,7 @@ const timer = setInterval(function() {
     })
     alert("Time's up!")
     async function saveScore() {
-      const res = await axios.post('http://127.0.0.1:5000/save-score', { score });
+      const res = await axios.post('/save-score', { score });
       const scores = res.data.scores;
       const highestScore = scores.reduce(function(a, b) {
         return Math.max(a, b)
@@ -29,7 +29,7 @@ $('#guess-form').submit(async function(evt) {
   evt.preventDefault();
   $('.alert').remove();
   const $guess = $('#guess').val()
-  const res = await axios.get('http://127.0.0.1:5000/check-word', {params: {guess: $guess}});
+  const res = await axios.get('/check-word', {params: {guess: $guess}});
   $('#guess').val('')
   const message = res.data.result;
 
