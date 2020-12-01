@@ -1,12 +1,13 @@
 from flask import Flask, session, request, redirect, render_template, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from boggle import Boggle
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "MrPoopyButthole"
-app.debug = True
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "MrPoopyButthole")
+# app.debug = True
 
-toolbar = DebugToolbarExtension(app)
+# toolbar = DebugToolbarExtension(app)
 
 boggle_game = Boggle()
 
